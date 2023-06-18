@@ -20,7 +20,7 @@ export const register = async (req, res, next) => {
     }).save();
   
 
-    const url = `${process.env.BASE_URL}`;
+  const url = `${process.env.BASE_URL}/Emailverify/${newUser._id}/${token.token}`;
     await sendEmail(newUser.email,"verify Email",url);
     
     res.status(200).send("An Email sent to your account");
