@@ -147,16 +147,10 @@ export const login = async (req, res, next) => {
       req.body.password,
       user.password
     );
-    if (!isPasswordCorrect)
+    if (!isPasswordCorrect){
       return next(createError(400, "Wrong password or username!"));
-      if (!user.verified) {
-        const token = await Token.findOne({ userId: user._id });
-       
-      }
-    // const token = jwt.sign(
-    //   { id: user._id },
-    //   process.env.JWT
-    // );
+    }
+  
 
     const { password, ...otherDetails } = user._doc;
     res
