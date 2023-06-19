@@ -150,22 +150,22 @@ export const login = async (req, res, next) => {
     );
     if (!isPasswordCorrect)
       return next(createError(400, "Wrong password or username!"));
-	   if (!user.verified) {
-        const token = await Token.findOne({ userId: user._id });
-        if (!token) {
-          token = await new Token({
-            userId: user._id,
-            token: crypto.randomBytes(32).toString("hex"),
-          }).save();
-          const url = `${process.env.BASE_URL}/Emailverify/${newUser._id}/${token.token}`;
-          await sendEmail(user.email, "Verify Email", url);
-        }
-      }
+	   // if (!user.verified) {
+    //     const token = await Token.findOne({ userId: user._id });
+    //     if (!token) {
+    //       token = await new Token({
+    //         userId: user._id,
+    //         token: crypto.randomBytes(32).toString("hex"),
+    //       }).save();
+    //       const url = `${process.env.BASE_URL}/Emailverify/${newUser._id}/${token.token}`;
+    //       await sendEmail(user.email, "Verify Email", url);
+    //     }
+    //   }
   
-    // const token = jwt.sign(
-    //   { id: user._id },
-    //   process.env.JWT
-    // );
+    const token = jwt.sign(
+      { id: user._id },
+      process.env.JWT
+    );
 
     const { password, ...otherDetails } = user._doc;
     res
