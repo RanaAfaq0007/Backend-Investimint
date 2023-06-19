@@ -87,6 +87,8 @@ export const sendPasswordEmail = async (req, res) => {
       return res.status(200).send("An Email sent to your account");
     }
   } catch (error) {
+	   console.log(error); // Log the error for debugging purposes
+    return res.status(500).json({ status: 500, message: 'Internal Server Error' });
   }
 };
 
